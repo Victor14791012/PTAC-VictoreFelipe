@@ -2,25 +2,23 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useState } from "react";
+import Link from "next/link";
+
 
 export default function Home() {
-  const [user, setUser]= useState(true)
+ return( 
+ <div> <h1>Faça o Login.</h1>
+
+  <Link href="/login">
+          <p className={styles.fale_conosco}> Clique aqui para Login</p>
+        </Link>
  
- if( user){
-  return(
-    <div> <h1>Victor</h1>
-    <button onClick={() => setUser(false)} >Clique porra</button>
-    </div>
+
+  </div>)
+  
+
     
-  )
- }
- else{
-  return(
-    <div> <h1>Felipe</h1>
-     <button onClick={() => setUser(true)} >Clique porra</button>
-     </div>
-  )
  }
 
- }
+ 
 
