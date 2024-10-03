@@ -1,8 +1,22 @@
-interface Usuario{
+interface Usuario {
+    id: number;               
     nome: string;
-    email: string;
-    idade: string;
+    email?: string;
+    password: string;
+    tipo: "cliente" | "adm";    
 }
+
+
+
+// #### Models ####
+
+// - Usuario
+//  id: int
+//  nome: string
+// email: string
+//  password: string
+//  tipo: string ("cliente"|"adm")
+
 
 // const PerfialUsuario: React.FC <{usuario: Usuario}> = ({usuario}) => {
 //     return(

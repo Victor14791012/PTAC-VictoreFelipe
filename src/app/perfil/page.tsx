@@ -9,15 +9,17 @@ import PerfilUsuario  from "../interfaces/perfilUsuario";
 
 const PaginaPerfil = () =>{
     const usuario = {
-        nome : 'asdf',
-        idade : '10',
-        email : 'a@gmail.com'
+        id: 1,
+        nome: "Victor",
+        email: "a@gmail",
+        password: "123",
+        tipo: "adm",
     }
 
     return (
         <div>
           <h1>Página Perfil</h1>
-          <PerfilUsuario usuario={usuario} />
+          <PerfilUsuario usuario={usuario} /> 
         </div>
       );
 }
