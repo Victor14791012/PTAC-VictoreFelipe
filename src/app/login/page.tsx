@@ -3,6 +3,7 @@ import styles from "../page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../componentes/Input";
+import Link from "next/link";
 
 
 export default function Login() {
@@ -47,7 +48,13 @@ export default function Login() {
           <p style={{ color: 'white' }}>{error}</p>
           <button type="submit" className={styles.link}>Login</button>
         </form>
+
+        <Link href="/cadastrar">
+          <p className="text-">Me cadastrar</p>
+        </Link>
       </div>
+    
+
     </div>
   );
 }
