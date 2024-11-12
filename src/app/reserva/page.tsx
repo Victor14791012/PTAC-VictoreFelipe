@@ -35,4 +35,3 @@ const PaginaReserva= () =>{
 }
 
 export default PaginaReserva
-

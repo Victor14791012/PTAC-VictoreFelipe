@@ -1,60 +1,56 @@
-'use client'
-import styles from "../page.module.css";
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../componentes/Input";
 import Link from "next/link";
 
-
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (email !== 'a@gmail.com' || password !== 'nota10') {
-      setError('E-mail ou senha inválidos');
+    if (email !== "a@gmail.com" || password !== "nota10") {
+      setError("E-mail ou senha inválidos");
       return;
     }
-
-    setError('');
-    router.push('/logado');
+    setError("");
+    router.push("/logado");
   }
 
   return (
-    <div className={styles.page}>
-      <div className={styles.main}>
-        <h2>Login</h2>
-        <form onSubmit={verificarLogin} className={styles.formulario}>
-         
+    <div className="container">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
+        <h2 className="text-2xl font-semibold text-center">Login</h2>
+        <form onSubmit={verificarLogin} className="space-y-4">
           <Input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className={styles.input}
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
           />
-
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
-            className={styles.input}
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
           />
-
-          <p style={{ color: 'white' }}>{error}</p>
-          <button type="submit" className={styles.link}>Login</button>
+          <p className="text-red-500 text-sm">{error}</p>
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Entrar
+          </button>
         </form>
-
         <Link href="/cadastrar">
-          <p className="text-">Me cadastrar</p>
+          <p className="text-center text-blue-500 hover:underline">Criar Conta</p>
         </Link>
       </div>
-    
-
     </div>
   );
 }
