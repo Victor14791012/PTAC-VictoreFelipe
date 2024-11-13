@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 import HtmlReserva  from "../interfaces/Reserva";
 
-
 const PaginaReserva= () =>{
     const reserva = {
     id : 1,

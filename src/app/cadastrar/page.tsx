@@ -11,7 +11,7 @@ export default function Cadastrar() {
 
   function handleCadastro(e: React.FormEvent) {
     e.preventDefault();
-    // Simulando cadastro com redirecionamento
+    // Simulando cadastro com redirecionamento 
     router.push("/login");
   }
 

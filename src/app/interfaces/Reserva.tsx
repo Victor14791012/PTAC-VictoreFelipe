@@ -7,7 +7,6 @@ interface Reserva {
     status: boolean;
 }
 
-
 const HtmlReserva: React.FC <{inf: Reserva}> = ({inf}) => {
     return(
         <div>
