@@ -16,7 +16,7 @@ export default function Cadastrar() {
   }
 
   return (
-    <div className="container">
+    <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
         <h2 className="text-2xl font-semibold text-center">Criar Conta</h2>
         <form onSubmit={handleCadastro} className="space-y-4">
