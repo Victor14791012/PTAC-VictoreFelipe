@@ -11,39 +11,39 @@ export default function Cadastrar() {
 
   function handleCadastro(e: React.FormEvent) {
     e.preventDefault();
-    // Simulando cadastro com redirecionamento 
+    // Simulando cadastro com redirecionamento
     router.push("/login");
   }
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
-        <h2 className="text-2xl font-semibold text-center">Criar Conta</h2>
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Criar Conta</h2>
         <form onSubmit={handleCadastro} className="space-y-4">
           <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nome Completo"
-            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-500"
           />
           <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-500"
           />
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"
-            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-500"
           />
           <button
             type="submit"
-            className="w-full py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="w-full py-2 bg-green-600 text-white text-lg font-medium rounded-lg hover:bg-green-700 transition duration-300"
           >
             Cadastrar
           </button>
