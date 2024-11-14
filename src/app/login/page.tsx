@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "../componentes/Input";
 import Link from "next/link";
-import Header from "../componentes/Header";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,19 +10,29 @@ export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  function verificarLogin(e: React.FormEvent) {
+  async function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (email !== "a@gmail.com" || password !== "nota10") {
-      setError("E-mail ou senha inválidos");
-      return;
+    try {
+      const response = await fetch("http://localhost:8000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        setError(data.mensagem);
+      } else {
+        localStorage.setItem("token", data.token);
+        router.push("/");
+      }
+    } catch (error) {
+      setError("Erro ao tentar fazer login. Tente novamente.");
     }
-    setError("");
-    router.push("/");
   }
 
   return (
-    <> 
-      {/* <Header username="Victor Carvalho" /> */}
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
         <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Login</h2>
@@ -57,6 +66,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-    </>
   );
 }
