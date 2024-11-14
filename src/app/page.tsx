@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Header username="Victor Carvalho" />
-      <div className="md:h-screen w- flex flex-col justify-center items-center w-full bg-gray-100">
+      <div className="md:h-screen w- flex flex-col justify-center items-center w-full bg-gray-100 md:mt-8">
         <div className="md:max-w-2xl max-w-[80%] text-center space-y-6">
           {/* Título e Introdução */}
           <h1 className="text-4xl font-bold text-gray-800">

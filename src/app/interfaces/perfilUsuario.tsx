@@ -1,5 +1,5 @@
 import React from "react";
-import Usuario from "./Usuario";
+import Usuario from "./usuario";
 
 const PerfilUsuario: React.FC<{ usuario: Usuario }> = ({ usuario }) => {
   return (

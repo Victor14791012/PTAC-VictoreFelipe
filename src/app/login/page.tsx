@@ -18,7 +18,7 @@ export default function Login() {
       return;
     }
     setError("");
-    router.push("/logado");
+    router.push("/");
   }
 
   return (
