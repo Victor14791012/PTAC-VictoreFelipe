@@ -17,7 +17,7 @@ export default function RootLayout({
       <head> 
       <link rel="icon" href="/logo.png" type="image/png" /> 
       </head>
-      <body className=" w-full ">
+      <body className=" w-full bg-gray-100">
         {children}
       </body>
     </html>

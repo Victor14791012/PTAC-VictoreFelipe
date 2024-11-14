@@ -16,21 +16,33 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
         </Link>
 
         <nav className="hidden md:flex  space-x-3">
-          <Link  href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black">
-            Reserva
+          <Link  href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+            Reservar
           </Link>
-          <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black">
+          <Link  href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
+            Reservas
+          </Link>
+          <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
             Menu
           </Link>
-          <Link href="/cadastrar" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black">
+          <Link href="/cadastrar" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
             Cadastrar
+          </Link>
+          <Link href="/login" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
+            Login
+          </Link>
+          <Link href="/perfil" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
+            Perfil
+          </Link>
+          <Link href="/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black  transition duration-300">
+            Mesa
           </Link>
         </nav>
       </div>
 
 
      
-<button className="rounded-lg p-2 hover:bg-gray-200">
+<button className="rounded-lg p-2 hover:bg-gray-200  transition duration-300">
   
    <div className="flex items-center text-[18px] space-x-2 text-[#822831]">
         <i className="bi bi-person-circle text-2xl text-black"></i>
