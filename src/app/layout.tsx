@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Footer from "./componentes/Footer";
 
 export const metadata: Metadata = {
   title: "Delicias da Cozinha",
@@ -19,6 +20,8 @@ export default function RootLayout({
       </head>
       <body className=" w-full bg-gray-100">
         {children}
+
+<Footer />
       </body>
     </html>
   );
