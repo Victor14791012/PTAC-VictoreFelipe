@@ -1,26 +1,34 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "./globals.css";
 import Footer from "./componentes/Footer";
-
-export const metadata: Metadata = {
-  title: "Delicias da Cozinha",
-  description: "O melhor restaurante do ms ",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("token"); 
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [router]);
+
   return (
     <html lang="en">
-      <head> 
-      <link rel="icon" href="/logo.png" type="image/png" /> 
+      <head>
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <title>Delicias da Cozinha</title>
+        <meta name="description" content="O melhor restaurante do MS" />
       </head>
-      <body className=" w-full bg-gray-100">
+      <body className="w-full bg-gray-100">
         {children}
-
-<Footer />
+        <Footer />
       </body>
     </html>
   );
