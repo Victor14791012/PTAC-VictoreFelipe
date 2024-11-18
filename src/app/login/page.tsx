@@ -25,6 +25,7 @@ export default function Login() {
         setError(data.mensagem);
       } else {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.nome);
         router.push("/");
       }
     } catch (error) {
