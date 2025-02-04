@@ -5,7 +5,7 @@ import Header from "../componentes/Header";
 const Menu = () => {
   return (
     <>
-      <Header username="Victor Carvalho" />
+      <Header />
       <div className="w-[90%] md:w-3/4 mx-auto flex flex-col  p-8 text-center">
         <h1 className="text-4xl font-bold text-gray-800 mb-8">
           Cardápio - Delícias da Cozinha

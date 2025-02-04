@@ -1,49 +1,56 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import HtmlReserva from "../interfaces/Reserva";
 import Header from "../componentes/Header"; // Importando o Header para manter o padrão
+import Reserva from "../interfaces/Reserva";
 
-// Dados simulados de várias reservas do usuário
-const reservas = [
-  {
-    id: 1,
-    usuario_id: 1,
-    mesa_id: 1,
-    data: new Date(),
-    n_pessoas: 2,
-    status: true,
-  },
-  {
-    id: 2,
-    usuario_id: 1,
-    mesa_id: 2,
-    data: new Date(),
-    n_pessoas: 4,
-    status: false,
-  },
-  {
-    id: 3,
-    usuario_id: 1,
-    mesa_id: 3,
-    data: new Date(),
-    n_pessoas: 6,
-    status: true,
-  },
-  {
-    id: 4,
-    usuario_id: 1,
-    mesa_id: 3,
-    data: new Date(),
-    n_pessoas: 6,
-    status: true,
-  },
-];
+
 
 const PaginaReserva = () => {
+  const [reservas, setReservas] = useState<Reserva[]>([]);
+  
+
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Pegue o token do localStorage
+  
+        const response = await fetch('http://localhost:8000/reservas/minhas_reservas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Enviando o token
+          }
+        });
+  
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          setReservas(jsonResponse.reservas); // A resposta está dentro de 'reservas'
+        } else {
+          console.error('Erro ao buscar reservas:', await response.text());
+        }
+      } catch (error) {
+        console.error('Erro ao buscar reservas:', error);
+      }
+    };
+  
+    fetchReservas();
+  }, []);
+  
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toISOString().split('T')[0]; // Obtém a data no formato YYYY-MM-DD
+    const formattedTime = date.toISOString().split('T')[1].slice(0, 5); // Obtém o horário no formato HH:MM
+    return `${formattedDate} ás ${formattedTime}`; // Combina data e hora
+  };
+  
+  
+
   return (
     <>
-      <Header username="Victor Carvalho" />
+      <Header />
       <div className="mt-8 bg-gradient-to-r w-full flex items-center justify-center">
         <div className="p-8 rounded-lg max-w-6xl w-full">
           <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-8">Minhas Reservas</h1>
@@ -57,8 +64,8 @@ const PaginaReserva = () => {
                 <div className="flex flex-col items-center">
                   <h2 className="text-2xl font-semibold text-gray-700 mb-4">Reserva {reserva.id}</h2>
                   <div className="text-gray-600 space-y-2 mb-4">
-                    <p><span className="font-medium text-blue-600">Mesa:</span> {reserva.mesa_id}</p>
-                    <p><span className="font-medium text-blue-600">Data:</span> {reserva.data.toLocaleDateString()} às {reserva.data.toLocaleTimeString()}</p>
+                    <p><span className="font-medium text-blue-600">Mesa Código:</span> {reserva.mesa.codigo}</p>
+                    <p><span className="font-medium text-blue-600">Data:</span> {formatDate(reserva.data)}</p>
                     <p><span className="font-medium text-blue-600">Número de Pessoas:</span> {reserva.n_pessoas}</p>
                     <p>
                       <span className="font-medium text-blue-600">Status:</span> 

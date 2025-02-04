@@ -12,13 +12,12 @@ const Reservas = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui, você poderia enviar os dados do formulário para um backend ou banco de dados
     alert(`Reserva feita para ${nome} em ${data} às ${hora} para ${pessoas} pessoas na mesa ${mesa}.`);
   };
 
   return (
     <>
-      <Header username="Victor Carvalho" />
+      <Header  />
       <div className="w-[80%] md:w-[30%] mx-auto m-12 bg-gray-100 p-8 rounded-lg shadow-lg ">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Reserva de Mesas</h1>
         
@@ -71,7 +70,7 @@ const Reservas = () => {
               onChange={(e) => setMesa(Number(e.target.value))}
               className="w-full p-2 border border-gray-300 rounded mt-1"
               min="1"
-              max="20" // Defina o número máximo de mesas conforme necessário
+              max="20" 
               required
             />
           </div>

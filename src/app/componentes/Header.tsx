@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <div className="flex items-center space-x-4">
         <Link href="/" className="text-white text-xl font-bold flex px-6 items-center">
           <img src="/logo.png" alt="Minha Logo" className="w-20 lg:w-24" />
-          <span className="p-0 m-0 w-32 text-center md:-ml-6">Delícias da Cozinha</span>
+          <span className="p-0 m-0 w-32 text-center md:-ml-2">Mamma Minha</span>
         </Link>
 
         <nav className="hidden md:flex space-x-3">
@@ -53,10 +53,10 @@ const Header: React.FC = () => {
       </div>
 
       <button className="rounded-lg p-2 hover:bg-gray-200 transition duration-300">
-        <div className="flex items-center text-[18px] space-x-2 text-[#822831]">
+        <Link  href="/perfil" className="flex items-center text-[18px] space-x-2 text-[#822831]">
           <i className="bi bi-person-circle text-2xl text-black"></i>
           <span className="hidden md:inline-block">{username}</span>
-        </div>
+        </Link>
       </button>
     </header>
   );
