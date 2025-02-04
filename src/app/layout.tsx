@@ -1,32 +1,26 @@
 "use client";
-
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import "./globals.css";
 import Footer from "./componentes/Footer";
+import Header from "./componentes/Header";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("token"); 
-    if (!isAuthenticated) {
-      router.push("/login");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login"); // Redireciona para a página de login
     }
   }, [router]);
 
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <title>Delicias da Cozinha</title>
-        <meta name="description" content="O melhor restaurante do MS" />
+        <title>Delícias da Cozinha</title>
       </head>
-      <body className="w-full bg-gray-100">
+      <body>
+        <Header />
         {children}
         <Footer />
       </body>
