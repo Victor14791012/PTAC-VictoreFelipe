@@ -1,137 +1,97 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
-import Header from "../componentes/Header";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import HtmlReserva from "../interfaces/Reserva";
+import Header from "../componentes/Header"; 
+import Reserva from "../interfaces/Reserva";
 import Autenticar from "../utils/withAuth"
 import AutenticarAdm from "../utils/withAdminAuth"
 
-const Reservas = () => {
-  const [data, setData] = useState("");
-  const [pessoas, setPessoas] = useState(1);
-  const [mesaId, setMesaId] = useState(1); 
-  const [mensagem, setMensagem] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    try {
-      const token = localStorage.getItem("token");
+const MinhasReservas = () => {
+  const [reservas, setReservas] = useState<Reserva[]>([]);
+  
 
-      const response = await fetch("http://localhost:8000/reservas/novo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Adicionando o token de autenticação
-        },
-        body: JSON.stringify({
-          data: data,
-          n_pessoas: pessoas,
-          mesaId: mesaId,
-        }),
-      });
-
-      const resultado = await response.json();
-
-      if (response.ok) {
-        setMensagem("Reserva feita com sucesso!");
-      } else {
-        setMensagem(resultado.mensagem || "Erro ao realizar a reserva.");
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Pegue o token do localStorage
+  
+        const response = await fetch('http://localhost:8000/reservas/minhas_reservas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        });
+  
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          setReservas(jsonResponse.reservas); // A resposta está dentro de 'reservas'
+        } else {
+          console.error('Erro ao buscar reservas:', await response.text());
+        }
+      } catch (error) {
+        console.error('Erro ao buscar reservas:', error);
       }
-    } catch (error) {
-      setMensagem("Erro ao conectar com o servidor.");
-      console.error("Erro:", error);
-    }
+    };
+  
+    fetchReservas();
+  }, []);
+  
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toISOString().split('T')[0]; // Obtém a data no formato YYYY-MM-DD
+    const formattedTime = date.toISOString().split('T')[1].slice(0, 5); // Obtém o horário no formato HH:MM
+    return `${formattedDate} ás ${formattedTime}`; 
   };
+  
+  
 
   return (
     <>
       <Header />
-      <div className="w-[80%] md:w-[30%] mx-auto m-12 bg-gray-100 p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Reserva de Mesas
-        </h1>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
+      <div className="mt-8 bg-gradient-to-r w-full flex items-center justify-center">
+        <div className="p-8 rounded-lg max-w-6xl w-full">
+          <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-8">Minhas Reservas</h1>
           
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {reservas.map((reserva) => (
+              <div
+                key={reserva.id}
+                className="p-6 rounded-lg shadow-xl bg-white hover:bg-gray-50 transition-all duration-300 transform hover:scale-105"
+              >
+                <div className="flex flex-col items-center">
+                  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Reserva {reserva.id}</h2>
+                  <div className="text-gray-600 space-y-2 mb-4">
+                    <p><span className="font-medium text-blue-600">Mesa Código:</span> {reserva.mesa.codigo}</p>
+                    <p><span className="font-medium text-blue-600">Data:</span> {formatDate(reserva.data)}</p>
+                    <p><span className="font-medium text-blue-600">Número de Pessoas:</span> {reserva.n_pessoas}</p>
+                    <p>
+                      <span className="font-medium text-blue-600">Status:</span> 
+                      <span className={reserva.status ? "text-green-600" : "text-red-600"}>
+                        {reserva.status ? "Confirmada" : "Cancelada"}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex justify-center space-x-4 mt-6">
+                    <button className="px-3 py-1 bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
+                      Confirmar Reserva
+                    </button>
+                    <button className="px-3 py-1 bg-red-600 text-white font-medium rounded-lg shadow-lg hover:bg-red-700 transition duration-300">
+                      Cancelar Reserva
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div>
-            <label
-              htmlFor="data"
-              className="block text-left text-gray-700 font-semibold"
-            >
-              Data:
-            </label>
-            <input
-              type="date"
-              id="data"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="pessoas"
-              className="block text-left text-gray-700 font-semibold"
-            >
-              Número de Pessoas(id):
-            </label>
-            <input
-              type="number"
-              id="pessoas"
-              value={pessoas}
-              onChange={(e) => setPessoas(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              min="1"
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="mesa"
-              className="block text-left text-gray-700 font-semibold"
-            >
-              Número da Mesa:
-            </label>
-            <input
-              type="number"
-              id="mesa"
-              value={mesaId}
-              onChange={(e) => setMesaId(Number(e.target.value))}
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              min="1"
-              max="20"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-yellow-900 text-white py-2 rounded hover:bg-yellow-600"
-          >
-            Confirmar Reserva
-          </button>
-        </form>
-
-        {mensagem && (
-          <p
-            className={`mt-4 text-center ${
-              mensagem.includes("sucesso")
-                ? "text-green-600"
-                : "text-red-600"
-            }`}
-          >
-            {mensagem}
-          </p>
-        )}
+        </div>
       </div>
     </>
   );
 };
 
-export default AutenticarAdm(Reservas);
+export default Autenticar(MinhasReservas);
