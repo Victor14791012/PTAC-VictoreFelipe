@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Header from "../componentes/Header";
 import Mesa from "../interfaces/Mesa";
+import Autenticar from "../utils/withAuth"
+import AutenticarAdm from "../utils/withAdminAuth"
 
 const PaginaMesa = () => {
   const [mesas, setMesas] = useState<Mesa[]>([]);
@@ -77,4 +79,4 @@ const PaginaMesa = () => {
   );
 };
 
-export default PaginaMesa;
+export default Autenticar(PaginaMesa);

@@ -29,10 +29,10 @@ const Header: React.FC = () => {
 
         <nav className="hidden md:flex space-x-3">
           <Link href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Reservar
+            M. Reservas
           </Link>
           <Link href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Reservas
+            Reservar
           </Link>
           <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
             Menu

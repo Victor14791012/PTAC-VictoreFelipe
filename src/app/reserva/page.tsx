@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import HtmlReserva from "../interfaces/Reserva";
 import Header from "../componentes/Header"; // Importando o Header para manter o padrão
 import Reserva from "../interfaces/Reserva";
+import Autenticar from "../utils/withAuth"
+import AutenticarAdm from "../utils/withAdminAuth"
 
 
 
@@ -92,4 +94,4 @@ const PaginaReserva = () => {
   );
 };
 
-export default PaginaReserva;
+export default Autenticar(PaginaReserva);

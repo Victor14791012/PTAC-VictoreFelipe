@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import Header from "../componentes/Header";
+import Autenticar from "../utils/withAuth"
+import AutenticarAdm from "../utils/withAdminAuth"
 
 const Menu = () => {
   return (

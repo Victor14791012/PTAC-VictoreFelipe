@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../componentes/Header";
 import Link from "next/link";
 import Usuario from "../interfaces/usuario";
+import Autenticar from "../utils/withAuth"
 
 const PaginaPerfil = () => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
@@ -68,4 +69,4 @@ const PaginaPerfil = () => {
   );
 };
 
-export default PaginaPerfil;
+export default Autenticar(PaginaPerfil);
