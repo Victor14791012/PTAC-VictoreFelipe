@@ -19,7 +19,7 @@ Este projeto foi desenvolvido como parte do Trabalho Final da disciplina PTAC (P
 2. **Passos:**
    - Clone este repositório:
      ```bash
-     git clone <https://github.com/Victor14791012/PTAC-VictoreFelipe>
+     git clone https://github.com/Victor14791012/PTAC-VictoreFelipe
      ```
 
    - Navegue até o diretório do projeto:

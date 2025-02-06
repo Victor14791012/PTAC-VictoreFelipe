@@ -22,6 +22,8 @@ export default function Login() {
 
       const data = await response.json();
 
+      const {erro , mensagem , token} = data
+
       if (data.error) {
         setError(data.mensagem);
       } else {

@@ -26,13 +26,15 @@ import Link from "next/link";
     }
 
     try {
+      const token = localStorage.getItem("token");
       // Enviar a requisição POST para cadastrar a mesa
       const response = await fetch("http://localhost:8000/mesa/novo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
         },
-        body: JSON.stringify({codigo : codigo , n_lugares : nLugares}),
+        body: JSON.stringify({ codigo: codigo, n_lugares: nLugares }),
       });
 
       const data = await response.json();
@@ -41,7 +43,7 @@ import Link from "next/link";
         setError(data.mensagem);
       } else {
         alert("Mesa cadastrada com sucesso!");
-        router.push("/mesas");
+        router.push("/adm/mesas");
       }
     } catch (error) {
       setError("Erro ao tentar cadastrar Mesa. Tente novamente.");
