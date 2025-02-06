@@ -43,9 +43,10 @@ Este projeto foi desenvolvido como parte do Trabalho Final da disciplina PTAC (P
 
 Uma apresentação sobre do trabalho será disponibilizada no YouTube. Acesse o link abaixo para assistir:
 
-[**Link para a apresentação no YouTube**](<>)
+[**Link para a apresentação no YouTube**]
+https://youtu.be/Gssci8bgvUs
 
----
 
-**Nota:** Este projeto foi idealizado, desenvolvido e implementado por **Victor Hugo Lourenço de Carvalho**, com a colaboração do **Felipe Marques**, sendo ambos responsáveis pela aplicação. 
+
+**Nota:** Este projeto foi desenvolvido e implementado por **Victor Hugo Lourenço de Carvalho**, com a colaboração do **Felipe Marques**. 
 
