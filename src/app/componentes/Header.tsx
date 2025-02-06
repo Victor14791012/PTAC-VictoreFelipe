@@ -7,6 +7,7 @@ const Header: React.FC = () => {
   const [username, setUsername] = useState("Visitante");
   const [userType, setUserType] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu hambúrguer
 
   useEffect(() => {
     const fetchPerfil = async () => {
@@ -56,15 +57,19 @@ const Header: React.FC = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev); // Alterna o estado do menu
+  };
+
   const renderAdminLinks = () => (
     <>
-      <Link href="/adm/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/adm/mesas" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Mesas
       </Link>
-      <Link href="/adm/mesas_novo" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/adm/mesas_novo" className="text-black md:text-white  rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Cadastrar Mesas
       </Link>
-      <Link href="/adm/todas_reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/adm/todas_reservas" className="text-black md:text-white  rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Todas as Reservas
       </Link>
     </>
@@ -72,19 +77,19 @@ const Header: React.FC = () => {
 
   const renderClientLinks = () => (
     <>
-      <Link href="/cadastrar" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/cadastrar" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Cadastrar
       </Link>
-      <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/menu" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Menu
       </Link>
-      <Link href="/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/mesas" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Mesas
       </Link>
-      <Link href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/reserva" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Reservar
       </Link>
-      <Link href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+      <Link href="/reservas" className="text-black md:text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
         Minhas Reservas
       </Link>
     </>
@@ -93,17 +98,37 @@ const Header: React.FC = () => {
   return (
     <header className="bg-yellow-400 p-4 flex items-center justify-between w-full md:px-32 relative">
       <div className="flex items-center space-x-4">
+          {/* Ícone de menu para telas pequenas */}
+          <button
+          onClick={toggleMenu}
+          className="text-white md:hidden flex items-center space-x-2 p-2"
+        >
+          <i className="bi bi-list text-2xl"></i> {/* Ícone de menu */}
+        </button>
+         {/* Menu de navegação (aparece em tela pequena quando clicado no ícone) */}
+         {isMenuOpen && (
+            <div className="  left-0 flex flex-col w-full bg-white border border-gray-300 rounded-lg shadow-lg z-50 p-4 space-y-2">
+              {userType === "adm" ? renderAdminLinks() : renderClientLinks()}
+            </div>
+          )}
         <Link href="/" className="text-white text-xl font-bold flex px-6 items-center">
           <img src="/logo.png" alt="Minha Logo" className="w-20 lg:w-24" />
           <span className="p-0 m-0 w-32 text-center md:-ml-6">Delícias da Cozinha</span>
         </Link>
 
+      
+
+       
+
+
+        {/* Menu de navegação (para telas grandes) */}
         <nav className="hidden md:flex space-x-3">
           {userType === "adm" ? renderAdminLinks() : renderClientLinks()}
         </nav>
       </div>
 
       <div className="relative">
+        {/* Ícone de perfil e dropdown */}
         <button
           onClick={toggleDropdown}
           className="rounded-lg p-2 hover:bg-gray-200 transition duration-300 flex items-center space-x-2 text-[#822831]"
@@ -112,6 +137,7 @@ const Header: React.FC = () => {
           <span className="hidden md:inline-block">{username}</span>
         </button>
 
+        {/* Dropdown do perfil e logout */}
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
             <Link
