@@ -21,7 +21,7 @@ const Reservar = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Adicionando o token de autenticação
+          Authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify({
           data: data,
@@ -46,6 +46,8 @@ const Reservar = () => {
   return (
     <>
       <Header />
+      <div className="mt-8 bg-gradient-to-r w-full flex flex-col lg:flex items-center justify-center">
+    
       <div className="w-[80%] md:w-[30%] mx-auto m-12 bg-gray-100 p-8 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Reserva de Mesas
@@ -129,6 +131,12 @@ const Reservar = () => {
             {mensagem}
           </p>
         )}
+      </div>
+      <div className="flex flex-col items-center justify-center">
+          <img src="/mapa.png" alt="mapa" className="w-full lg:w-1/2"  />
+          
+        </div>
+
       </div>
     </>
   );

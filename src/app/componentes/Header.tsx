@@ -8,18 +8,38 @@ const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      const nameParts = storedUsername.trim().split(" ");
-      if (nameParts.length > 1) {
-        const firstName = nameParts[0];
-        const lastName = nameParts[nameParts.length - 1];
-        setUsername(`${firstName} ${lastName}`);
-      } else {
-        setUsername(storedUsername);
+    const fetchPerfil = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:8000/perfil/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          const nomeCompleto = data.nome;
+  
+          if (nomeCompleto) {
+            const nameParts = nomeCompleto.trim().split(" ");
+            const firstName = nameParts[0];
+            const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
+            setUsername(`${firstName} ${lastName}`.trim());
+          }
+        } else {
+          console.error("Erro ao buscar perfil:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar perfil:", error);
       }
-    }
+    };
+  
+    fetchPerfil();
   }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -38,28 +58,30 @@ const Header: React.FC = () => {
       <div className="flex items-center space-x-4">
         <Link href="/" className="text-white text-xl font-bold flex px-6 items-center">
           <img src="/logo.png" alt="Minha Logo" className="w-20 lg:w-24" />
-          <span className="p-0 m-0 w-32 text-center md:-ml-2">Mamma Minha</span>
+          <span className="p-0 m-0 w-32 text-center md:-ml-6">Delícias da Cozinha</span>
         </Link>
 
         <nav className="hidden md:flex space-x-3">
           <Link href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
             M. Reservas
           </Link>
+          <Link href="/reservas_por_data" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+            M. Reservas por Data
+          </Link>
           <Link href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
             Reservar
           </Link>
-          <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Menu
-          </Link>
-          <Link href="/cadastrar" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Cadastrar
-          </Link>
-          <Link href="/login" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Login
+          <Link href="/mesas_novo" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+            Cadastrar Mesas
           </Link>
           <Link href="/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
             Mesas
           </Link>
+          <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+            Menu
+          </Link>
+          
+          
         </nav>
       </div>
 

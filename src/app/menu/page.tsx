@@ -25,7 +25,7 @@ const Menu = () => {
               { name: "Ravioli de Ricota", desc: "Ravioli recheado com ricota e espinafre.", price: "R$ 34,90", img: "https://renata.com.br/images/receitas/207/renata-imagem-receitas-ravioli-de-ricota-share.jpg" },
               { name: "Gnocchi ao Sugo", desc: "Gnocchi de batata com molho sugo.", price: "R$ 28,90", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhnBBgAY9numZ3Ts5ll2eNEEmvXKMlyE4TTT1WfZt21pnP8DSlAKgU3slnz58j2HMPwpvU_EekGhRnvecLdN2r2G9F3pUfa7XhqNNiowycwzCQ5zv_9qhhQs5io9iVntvg3YvNFUdilIFI/s1600/IMG_3787.JPG" }
             ].map((item, index) => (
-              <div key={index} className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+              <div key={index} className="bg-white border transition-all duration-300 transform hover:scale-105 border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
                 <img src={item.img} alt={item.name} className="w-full h-40 object-cover rounded-md mb-4" />
                 <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
                 <p className="text-gray-600 mt-2">{item.desc}</p>
@@ -44,7 +44,7 @@ const Menu = () => {
               { name: "Caprese", desc: "Salada de tomate, mussarela de búfala e manjericão.", price: "R$ 18,90", img: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Farchive%2F3b432b41ce04c96a08d77befa42b9881a587a436" },
               { name: "Arancini", desc: "Bolinhas de risoto fritas, recheadas com queijo.", price: "R$ 19,90", img: "https://www.allrecipes.com/thmb/Db47R1UZ4Cp3dNQ1flizV7KiZ8c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/RM-57844-Arancini-ddmfs-2x1-6022-6ea5a1b1639c401bbce717f1f9d84dbf.jpg" }
             ].map((item, index) => (
-              <div key={index} className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+              <div key={index} className="bg-white transition-all duration-300 transform hover:scale-105 border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
                 <img src={item.img} alt={item.name} className="w-full h-40 object-cover rounded-md mb-4" />
                 <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
                 <p className="text-gray-600 mt-2">{item.desc}</p>
@@ -63,7 +63,7 @@ const Menu = () => {
               { name: "Panna Cotta", desc: "Sobremesa cremosa com calda de frutas vermelhas.", price: "R$ 16,90", img: "https://receitatodahora.com.br/wp-content/uploads/2019/07/panacota.jpg" },
               { name: "Gelato", desc: "Sorvete italiano, sabores variados.", price: "R$ 12,90", img: "https://noticias.maringa.com/storage/noticias/uDvmv-sorvete-ou-gelato-entenda-a-diferenca-entre-as-sobremesas-refrescantes.webp" }
             ].map((item, index) => (
-              <div key={index} className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+              <div key={index} className="bg-white transition-all duration-300 transform hover:scale-105 border border-gray-300 rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
                 <img src={item.img} alt={item.name} className="w-full h-40 object-cover rounded-md mb-4" />
                 <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
                 <p className="text-gray-600 mt-2">{item.desc}</p>

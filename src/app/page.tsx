@@ -21,7 +21,7 @@ export default function Home() {
 
           {/* Botões de Funcionalidades */}
           <div className="flex justify-center items-center space-x-4 mt-8">
-            <Link href="/reservas">
+            <Link href="/reserva">
               <button className="px-4 py-2 bg-[#bd2f25] text-white rounded hover:bg-yellow-600">
                 Reservar Mesa
               </button>

@@ -9,7 +9,6 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
     useEffect(() => {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("Faça login ou se cadastre.");
         router.push("/login"); 
       }
     }, [router]);
