@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trabalho Final de PTAC - Sistema de Gestão de Reservas
 
-## Getting Started
+## Desenvolvedor: Victor Hugo Lourenço de Carvalho
+## Colaboração: Felipe Marques
 
-First, run the development server:
+Este projeto foi desenvolvido como parte do Trabalho Final da disciplina PTAC (Programação e Tecnologias para Aplicações Cliente). O objetivo do projeto foi criar um sistema de gestão de reservas para um restaurante fictício, permitindo a realização de reservas de mesas, visualização de menus e muito mais. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Tecnologias Utilizadas:
+- **Frontend:** Next.js, React, Tailwind CSS
+- **Backend:** Prisma (para interação com banco de dados)
+- **Banco de Dados:** PostgreSQL
+- **Autenticação:** JWT (JSON Web Tokens)
+  
+### Como Rodar o Projeto:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Requisitos:**  
+   Para rodar este projeto, é necessário ter o meu projeto PTAS (https://github.com/Victor14791012/PTAS-6-Semestre) em conjunto com o código de front-end. A parte do backend deve ser executada primeiro para garantir a comunicação adequada entre o frontend e o banco de dados.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Passos:**
+   - Clone este repositório:
+     ```bash
+     git clone <https://github.com/Victor14791012/PTAC-VictoreFelipe>
+     ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   - Navegue até o diretório do projeto:
+   
 
-## Learn More
+   - Instale as dependências do projeto:
+     ```bash
+     npm install
+     ```
 
-To learn more about Next.js, take a look at the following resources:
+   - Rode o servidor de desenvolvimento:
+     ```bash
+     npm run dev
+     ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - O frontend estará disponível em [http://localhost:3000].
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Caso não tenha o backend configurado, clone o repositório https://github.com/Victor14791012/PTAS-6-Semestre e o execute antes de executar o front-end.
 
-## Deploy on Vercel
+### Link de Apresentação:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Uma apresentação sobre do trabalho será disponibilizada no YouTube. Acesse o link abaixo para assistir:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[**Link para a apresentação no YouTube**](<>)
+
+---
+
+**Nota:** Este projeto foi idealizado, desenvolvido e implementado por **Victor Hugo Lourenço de Carvalho**, com a colaboração do **Felipe Marques**, sendo ambos responsáveis pela aplicação. 
+

@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Header: React.FC = () => {
   const [username, setUsername] = useState("Visitante");
+  const [userType, setUserType] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -18,17 +19,20 @@ const Header: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         if (response.ok) {
           const data = await response.json();
           const nomeCompleto = data.nome;
-  
+
           if (nomeCompleto) {
             const nameParts = nomeCompleto.trim().split(" ");
             const firstName = nameParts[0];
             const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
             setUsername(`${firstName} ${lastName}`.trim());
           }
+
+          const tipoUsuario = data.tipo || localStorage.getItem("tipo");
+          setUserType(tipoUsuario);
         } else {
           console.error("Erro ao buscar perfil:", response.statusText);
         }
@@ -36,10 +40,9 @@ const Header: React.FC = () => {
         console.error("Erro ao buscar perfil:", error);
       }
     };
-  
+
     fetchPerfil();
   }, []);
-  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -53,6 +56,40 @@ const Header: React.FC = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const renderAdminLinks = () => (
+    <>
+      <Link href="/adm/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Mesas
+      </Link>
+      <Link href="/adm/mesas_novo" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Cadastrar Mesas
+      </Link>
+      <Link href="/adm/todas_reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Todas as Reservas
+      </Link>
+    </>
+  );
+
+  const renderClientLinks = () => (
+    <>
+      <Link href="/cadastrar" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Cadastrar
+      </Link>
+      <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Menu
+      </Link>
+      <Link href="/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Mesas
+      </Link>
+      <Link href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Reservar
+      </Link>
+      <Link href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
+        Minhas Reservas
+      </Link>
+    </>
+  );
+
   return (
     <header className="bg-yellow-400 p-4 flex items-center justify-between w-full md:px-32 relative">
       <div className="flex items-center space-x-4">
@@ -62,26 +99,7 @@ const Header: React.FC = () => {
         </Link>
 
         <nav className="hidden md:flex space-x-3">
-          <Link href="/reservas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            M. Reservas
-          </Link>
-          <Link href="/reservas_por_data" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            M. Reservas por Data
-          </Link>
-          <Link href="/reserva" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Reservar
-          </Link>
-          <Link href="/mesas_novo" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Cadastrar Mesas
-          </Link>
-          <Link href="/mesas" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Mesas
-          </Link>
-          <Link href="/menu" className="text-white rounded-lg p-2 hover:bg-gray-200 hover:text-black transition duration-300">
-            Menu
-          </Link>
-          
-          
+          {userType === "adm" ? renderAdminLinks() : renderClientLinks()}
         </nav>
       </div>
 

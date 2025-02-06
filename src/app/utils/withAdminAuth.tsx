@@ -2,11 +2,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// Define a estrutura esperada do token
-interface DecodedToken {
-  tipo: string; // Ex: "adm" ou "usuario"
-  exp: number;  // Data de expiração do token (em segundos)
-}
 
 const withAdminAuth = (WrappedComponent: React.ComponentType) => {
   return (props: any) => {
@@ -28,7 +23,7 @@ const withAdminAuth = (WrappedComponent: React.ComponentType) => {
         // Verifica se o tipo é 'adm'
         if (tipo !== "adm") {
           alert("Acesso restrito para administradores.");
-          router.push("/"); // Redireciona para a home se não for admin
+          router.push("/"); // Redireciona para a home se não for adm
           return;
         }
 

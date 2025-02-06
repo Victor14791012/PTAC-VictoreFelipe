@@ -8,10 +8,6 @@ import AutenticarAdm from "../utils/withAdminAuth";
 
 const PaginaMesa = () => {
   const [mesas, setMesas] = useState<Mesa[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [mesaEditando, setMesaEditando] = useState<Mesa | null>(null);
-  const [codigo, setCodigo] = useState<string>("");
-  const [nLugares, setNLugares] = useState<number>(0);
 
   // Buscar as mesas
   useEffect(() => {
@@ -41,47 +37,7 @@ const PaginaMesa = () => {
   }, []);
 
   // Função para abrir o modal e preencher os dados da mesa
-  const abrirModal = (mesa: Mesa) => {
-    setMesaEditando(mesa);
-    setCodigo(mesa.codigo);
-    setNLugares(mesa.n_lugares);
-    setModalOpen(true);
-  };
 
-  // Função para atualizar a mesa
-  const atualizarMesa = async () => {
-    if (mesaEditando) {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8000/mesa/atualizar", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            id: mesaEditando.id,
-            codigo: codigo,
-            n_lugares: nLugares,
-          }),
-        });
-
-        if (response.ok) {
-          const jsonResponse = await response.json();
-          alert(jsonResponse.mensagem);
-          setModalOpen(false); // Fechar o modal após a atualização
-          // Atualizar a lista de mesas
-          setMesas(mesas.map((mesa) =>
-            mesa.id === mesaEditando.id ? { ...mesa, codigo, n_lugares: nLugares } : mesa
-          ));
-        } else {
-          console.error("Erro ao atualizar mesa:", await response.text());
-        }
-      } catch (error) {
-        console.error("Erro ao atualizar mesa:", error);
-      }
-    }
-  };
 
   return (
     <>
@@ -113,12 +69,7 @@ const PaginaMesa = () => {
                       <span className="font-medium text-blue-600">Número de Lugares:</span> {mesa.n_lugares}
                     </p>
                   </div>
-                  <button
-                    className="p-3 h-14 py-1 bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
-                    onClick={() => abrirModal(mesa)}
-                  >
-                    Editar Mesa
-                  </button>
+                 
                 </div>
               </div>
             ))}
@@ -130,46 +81,7 @@ const PaginaMesa = () => {
         </div>
       </div>
 
-      {/* Modal */}
-      {modalOpen && mesaEditando && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">Editar Mesa {mesaEditando.id}</h2>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Código</label>
-              <input
-                type="text"
-                value={codigo}
-                onChange={(e) => setCodigo(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Número de Lugares</label>
-              <input
-                type="number"
-                value={nLugares}
-                onChange={(e) => setNLugares(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            <div className="flex justify-between">
-              <button
-                onClick={() => setModalOpen(false)}
-                className="px-4 py-2 bg-gray-600 text-white rounded-md"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={atualizarMesa}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md"
-              >
-                Atualizar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    
     </>
   );
 };

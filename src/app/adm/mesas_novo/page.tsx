@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Input from "../componentes/Input";
-import Header from "../componentes/Header";
+import Input from "../../componentes/Input";
+import Header from "../../componentes/Header";
+import AutenticarAdm from "../../utils/withAdminAuth";
 import Link from "next/link";
 
-export default function cadastrarMesa() {
+ function cadastrarMesa() {
     //definindo os estados para armazenar os dados
   const [codigo, setCodigo] = useState(""); 
   const [nLugares, setNLugares] = useState("");
@@ -83,3 +84,6 @@ export default function cadastrarMesa() {
     </>
   );
 }
+
+export default AutenticarAdm(cadastrarMesa);
+
