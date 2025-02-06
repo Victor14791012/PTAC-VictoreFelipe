@@ -8,7 +8,7 @@ Este projeto foi desenvolvido como parte do Trabalho Final da disciplina PTAC (P
 ### Tecnologias Utilizadas:
 - **Frontend:** Next.js, React, Tailwind CSS
 - **Backend:** Prisma (para interação com banco de dados)
-- **Banco de Dados:** PostgreSQL
+- **Banco de Dados:** Sqlite
 - **Autenticação:** JWT (JSON Web Tokens)
   
 ### Como Rodar o Projeto:
@@ -43,7 +43,7 @@ Este projeto foi desenvolvido como parte do Trabalho Final da disciplina PTAC (P
 
 Uma apresentação sobre do trabalho será disponibilizada no YouTube. Acesse o link abaixo para assistir:
 
-[**Link para a apresentação no YouTube**]
+[**Link para a apresentação no YouTube**] :
 https://youtu.be/Gssci8bgvUs
 
 
